@@ -1,0 +1,33 @@
+用git上传nodejsweb应用程序相关步骤
+01.先下载git的相关工具
+02.安装后选择一个目录，作为你的本地仓库
+mkdir 文件名
+cd  文件名
+pwd //查看路径
+如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。
+03.通过git init命令把这个目录变成Git可以管理的仓库
+git init
+仓库建好了，是一个空的仓库（empty Git repository），当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。
+如果没有看到.git目录，那是因为这个目录默认是隐藏的，用ls -ah命令就可以看见。
+04.需要通过git 在github上clone一个nodejs示例程序
+git clone https://github.com/sinacloud/nodejs-getting-started.git
+示例代码中包含了三个文件，其中 index.js 是代码文件， package.json 是 npm 的包管理描述文件。
+在此我们需要其中的package.json，将其拷贝到你的项目中和index.js放在同一个目录结构下（服务器的名称必为index.js）
+将我们的项目拷贝到本地仓库中，也就是上面mkdir的文件名
+/---------------------/
+在新浪云上创建自己的一个项目，并复制创建的应用名;
+然后通过git remote add sinacloud https://git.sinacloud.com/复制的应用名;链接到新浪云的仓库
+05.git add .(点必不可少)
+   git git commit -m "谁便写什么"
+   git push sae master
+   
+ 如果出现错误，用npm start来判断错误在哪，
+ 注意端口号必须是5050
+ /------切割-----------------/
+ 需要修改数据库并上传到共享型数据库中去，需要参考新浪云上共享型mysql那个说明，并修改连接池
+  host     : process.env.MYSQL_HOST,
+    port     : process.env.MYSQL_PORT,
+    user     : process.env.ACCESSKEY,
+    password : process.env.SECRETKEY,
+    database : 'app_' + process.env.APPNAME
+上传成功后可以通过看容器管理的错误日志来进行错误查找
